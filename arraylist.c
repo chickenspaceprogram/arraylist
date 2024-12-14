@@ -6,7 +6,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "arraylist.h"
+#include <arraylist/arraylist.h>
 
 #define MIN_STACK_SIZE 16
 #define STACK_REDUCE_TRIGGER 4 // stack will realloc() when num_elements < space / STACK_REDUCE_TRIGGER && space > MIN_STACK_SIZE

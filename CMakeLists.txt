@@ -3,12 +3,16 @@
 #  file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 cmake_minimum_required(VERSION 3.15)
-project(arraylist-tests C)
+project(arraylist C)
+
+set(ARRAYLIST_HEADER_LIST "${arraylist_SOURCE_DIR}/include/arraylist/arraylist.h")
 
 add_library(arraylist
     arraylist.c
-    arraylist.h
+    ${ARRAYLIST_HEADER_LIST}
 )
+
+target_include_directories(arraylist PUBLIC "${PROJECT_SOURCE_DIR}/include")
 
 add_executable(TEST-arraylist
     tests/TEST-arraylist.c
@@ -23,3 +27,9 @@ add_test(
     COMMAND $<TARGET_FILE:TEST-arraylist>
 )
 
+
+source_group(
+    TREE "${PROJECT_SOURCE_DIR}/include"
+    PREFIX "Header Files"
+    FILES ${ARRAYLIST_HEADER_LIST}
+)

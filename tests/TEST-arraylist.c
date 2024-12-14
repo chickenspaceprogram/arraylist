@@ -7,7 +7,7 @@
 #include <assert.h>
 #include <string.h>
 #include <stddef.h>
-#include "../arraylist.h"
+#include <arraylist/arraylist.h>
 
 
 int main(void) {
