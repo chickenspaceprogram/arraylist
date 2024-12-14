@@ -25,6 +25,7 @@ struct array_list {
     int (*peek)(ArrayList *list, void *buf); // copies the top object into `buf`
     void (*free)(ArrayList *list); // frees the stack
     void *(*getArray)(ArrayList *list); // returns a pointer to data_arr
+    size_t (*getSize)(ArrayList *list); // gets the length of the ArrayList
 };
 
 ArrayList newArrayList(size_t element_size);

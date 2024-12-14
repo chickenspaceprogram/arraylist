@@ -19,6 +19,8 @@ int main(void) {
         assert(list.push(&list, &(str[i])) != -1);
     }
 
+    assert(list.getSize(list) == len);
+
     char *arr = list.getArray(&list);
     for (int i = 0; i < len; ++i) {
         assert(arr[i] == str[i]);

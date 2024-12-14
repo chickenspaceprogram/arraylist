@@ -19,6 +19,7 @@ int pop(ArrayList *list, void *buf);
 int peek(ArrayList *list, void *buf);
 void freeArrayList(ArrayList *list);
 void *getArray(ArrayList *list);
+size_t getSize(ArrayList *list);
 
 /* Private */
 int reallocArrayList(ArrayList *list, size_t new_size); // new_size is a number of elements, not a size in bytes!
@@ -36,7 +37,8 @@ ArrayList newArrayList(size_t element_size) {
         .pop =  &pop,
         .peek = &peek,
         .free = &freeArrayList,
-        .getArray = &getArray
+        .getArray = &getArray,
+	.getSize = &getSize
     };
     new.data_arr = malloc(new.element_size * new.space); // user must check this for NULL
     return new;
@@ -86,6 +88,10 @@ void freeArrayList(ArrayList *list) {
 
 inline void *getArray(ArrayList *list) {
     return list->data_arr;
+}
+
+size_t getSize(ArrayList *list) {
+    return list->num_elements;
 }
 
 /* Private */
