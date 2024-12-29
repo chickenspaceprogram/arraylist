@@ -5,3 +5,4 @@ CMakeCache.txt
 compile_commands.json
 CTestTestfile.cmake
 Makefile
+.cache
