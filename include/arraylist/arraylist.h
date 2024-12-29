@@ -7,6 +7,10 @@
 #ifndef ARRAYLIST_H
 #define ARRAYLIST_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stddef.h>
 
 typedef struct array_list ArrayList;
@@ -29,5 +33,9 @@ struct array_list {
 };
 
 ArrayList newArrayList(size_t element_size);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
