@@ -6,6 +6,7 @@ cmake_minimum_required(VERSION 3.15)
 project(arraylist C)
 
 set(ARRAYLIST_HEADER_LIST "${arraylist_SOURCE_DIR}/include/arraylist/arraylist.h")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_library(arraylist
     arraylist.c
