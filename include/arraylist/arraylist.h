@@ -20,7 +20,6 @@ struct chicken_space_program_array_list {
     size_t space;
 };
 
-// these method names are very long, but i use this in other libraries that might actually get used by people, and i don't want name collisions
 // vim has autocomplete, you can type this, stop complaining
 
 CSPArrayList CSP_array_list_new(size_t element_size);
