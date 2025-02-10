@@ -15,7 +15,7 @@ int main(void) {
     char str[] = "hello world this is a test of an arraylist";
     char temp;
     size_t len = strlen(str);
-    for (int i = 0; i < len; ++i) {
+    for (size_t = 0; i < len; ++i) {
         assert(CSP_array_list_push(&list, &(str[i])) != -1);
     }
 
@@ -26,7 +26,7 @@ int main(void) {
         assert(arr[i] == str[i]);
     }
 
-    for (size_t i = len - 1; i >= 0; --i) {
+    for (ssize_t i = len - 1; i >= 0; --i) {
         assert(CSP_array_list_pop(&list, &temp) != -1);
         assert(temp == str[i]);
     }
