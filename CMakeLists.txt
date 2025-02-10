@@ -21,8 +21,7 @@ add_executable(TEST-arraylist
 
 target_link_libraries(TEST-arraylist arraylist)
 
-enable_testing()
-
+include(CTest)
 add_test(
     NAME arraylist
     COMMAND $<TARGET_FILE:TEST-arraylist>

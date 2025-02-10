@@ -13,32 +13,17 @@
 #define STACK_REDUCE_MULTIPLIER 2 // stack will be reduced to a size of space / STACK_REDUCE_MULTIPLIER when necessary
 #define STACK_GROW_MULTIPLIER 2 // stack will grow to a size of space * STACK_GROW_MULTIPLIER when necessary
 
-/* Public */
-int push(ArrayList *list, void *obj);
-int pop(ArrayList *list, void *buf);
-int peek(ArrayList *list, void *buf);
-void freeArrayList(ArrayList *list);
-void *getArray(ArrayList *list);
-size_t getSize(ArrayList *list);
-
-/* Private */
-int reallocArrayList(ArrayList *list, size_t new_size); // new_size is a number of elements, not a size in bytes!
+static int reallocArrayList(CSPArrayList *list, size_t new_size); // new_size is a number of elements, not a size in bytes!
 
 
 
 /* Constructor */
-ArrayList newArrayList(size_t element_size) {
-    ArrayList new = {
+CSPArrayList CSP_array_list_new(size_t element_size) {
+    CSPArrayList new = {
         .data_arr = NULL,
         .num_elements = 0,
         .element_size = element_size,
         .space = MIN_STACK_SIZE, // number of elements, not number of bytes
-        .push = &push,
-        .pop =  &pop,
-        .peek = &peek,
-        .free = &freeArrayList,
-        .getArray = &getArray,
-	.getSize = &getSize
     };
     new.data_arr = malloc(new.element_size * new.space); // user must check this for NULL
     return new;
@@ -46,7 +31,7 @@ ArrayList newArrayList(size_t element_size) {
 
 /* Public */
 
-int push(ArrayList *list, void *obj) {
+int CSP_array_list_push(CSPArrayList *list, void *obj) {
     if (list->num_elements >= list->space) {
         if (reallocArrayList(list, list->space * STACK_GROW_MULTIPLIER) == -1) {
             return -1;
@@ -58,9 +43,9 @@ int push(ArrayList *list, void *obj) {
     return 0;
 }
 
-int pop(ArrayList *list, void *buf) {
+int CSP_array_list_pop(CSPArrayList *list, void *buf) {
 
-    if (list->peek(list, buf) == -1) {
+    if (CSP_array_list_peek(list, buf) == -1) {
         return -1;
     }
     
@@ -71,7 +56,7 @@ int pop(ArrayList *list, void *buf) {
     return 0;
 }
 
-int peek(ArrayList *list, void *buf) {
+int CSP_array_list_peek(CSPArrayList *list, void *buf) {
     if (list->num_elements == 0) {
         return -1;
     }
@@ -79,23 +64,23 @@ int peek(ArrayList *list, void *buf) {
     return 0;
 }
 
-void freeArrayList(ArrayList *list) {
+void CSP_array_list_free(CSPArrayList *list) {
     free(list->data_arr);
     list->data_arr = NULL;
     list->space = 0;
     list->num_elements = 0;
 }
 
-inline void *getArray(ArrayList *list) {
+void *CSP_array_list_get_array(CSPArrayList *list) {
     return list->data_arr;
 }
 
-size_t getSize(ArrayList *list) {
+size_t CSP_array_list_get_size(CSPArrayList *list) {
     return list->num_elements;
 }
 
 /* Private */
-int reallocArrayList(ArrayList *list, size_t new_size) {
+int reallocArrayList(CSPArrayList *list, size_t new_size) {
 
     if (list->num_elements > list->space) {
         return -1;
@@ -105,7 +90,7 @@ int reallocArrayList(ArrayList *list, size_t new_size) {
 
     // checking for memory allocation issues
     if (new_ptr == NULL) {
-        list->free(list);
+        CSP_array_list_free(list);
         return -1;
     }
 

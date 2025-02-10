@@ -11,24 +11,24 @@
 
 
 int main(void) {
-    ArrayList list = newArrayList(sizeof(char));
+    CSPArrayList list = CSP_array_list_new(sizeof(char));
     char str[] = "hello world this is a test of an arraylist";
     char temp;
     size_t len = strlen(str);
     for (int i = 0; i < len; ++i) {
-        assert(list.push(&list, &(str[i])) != -1);
+        assert(CSP_array_list_push(&list, &(str[i])) != -1);
     }
 
-    assert(list.getSize(&list) == len);
+    assert(CSP_array_list_get_size(&list) == len);
 
-    char *arr = list.getArray(&list);
+    char *arr = CSP_array_list_get_array(&list);
     for (int i = 0; i < len; ++i) {
         assert(arr[i] == str[i]);
     }
 
     for (int i = len - 1; i >= 0; --i) {
-        assert(list.pop(&list, &temp) != -1);
+        assert(CSP_array_list_pop(&list, &temp) != -1);
         assert(temp == str[i]);
     }
-    list.free(&list);
+    CSP_array_list_free(&list);
 }
