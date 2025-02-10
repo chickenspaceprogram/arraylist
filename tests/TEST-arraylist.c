@@ -22,11 +22,11 @@ int main(void) {
     assert(CSP_array_list_get_size(&list) == len);
 
     char *arr = CSP_array_list_get_array(&list);
-    for (int i = 0; i < len; ++i) {
+    for (size_t i = 0; i < len; ++i) {
         assert(arr[i] == str[i]);
     }
 
-    for (int i = len - 1; i >= 0; --i) {
+    for (size_t i = len - 1; i >= 0; --i) {
         assert(CSP_array_list_pop(&list, &temp) != -1);
         assert(temp == str[i]);
     }
