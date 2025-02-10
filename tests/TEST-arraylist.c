@@ -26,7 +26,7 @@ int main(void) {
         assert(arr[i] == str[i]);
     }
 
-    for (ssize_t i = len - 1; i >= 0; --i) {
+    for (int i = len - 1; i >= 0; --i) {
         assert(CSP_array_list_pop(&list, &temp) != -1);
         assert(temp == str[i]);
     }
